@@ -3,11 +3,11 @@ export const prices: Record<
   Record<'premium' | 'team', string>
 > = {
   development: {
-    premium: 'price_1QA7JEJKLsVNmaiRillvBTsw',
-    team: 'price_1QA7K5JKLsVNmaiR4YY86rL4',
+    premium: 'price_1QSZebP6aVFVPJq5fCN7gaLn',
+    team: 'price_1QSZebP6aVFVPJq5fCN7gaLn',
   },
   production: {
-    premium: 'price_1QA7KRJKLsVNmaiRZg6VcoKT',
-    team: 'price_1QA7KMJKLsVNmaiRy5KrzX3l',
+    premium: 'price_1QSZebP6aVFVPJq5fCN7gaLn',
+    team: 'price_1QSZebP6aVFVPJq5fCN7gaLn',
   },
 };

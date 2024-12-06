@@ -40,7 +40,7 @@ export const { auth, signIn, signOut, handlers, unstable_update } = NextAuth({
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: process.env.NODE_ENV === 'production' ? true : false,
+        secure: process.env.NODE_ENV === 'production' ? true : false
       },
     },
   },

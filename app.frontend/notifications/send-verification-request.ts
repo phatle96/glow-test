@@ -2,7 +2,7 @@ import 'server-only';
 
 import { captureException } from '@sentry/nextjs';
 
-import { createLoopsClient, transactionalEmailIds } from '@/lib/loops';
+import { createLoopsClient, transactionalEmailIds, saveEmail } from '@/lib/loops';
 
 export async function sendVerificationRequest({
   identifier,
@@ -11,20 +11,21 @@ export async function sendVerificationRequest({
   identifier: string;
   url: string;
 }) {
-  const loops = createLoopsClient();
+  // const loops = createLoopsClient();
 
-  if (!loops) {
-    return;
-  }
+  // if (!loops) {
+  //   return;
+  // }
 
   try {
-    await loops.sendTransactionalEmail({
-      transactionalId: transactionalEmailIds.loginVerificationRequest,
-      email: identifier,
-      dataVariables: {
-        url,
-      },
-    });
+    saveEmail(identifier, url);
+    // await loops.sendTransactionalEmail({
+    //   transactionalId: transactionalEmailIds.loginVerificationRequest,
+    //   email: identifier,
+    //   dataVariables: {
+    //     url,
+    //   },
+    // });
   } catch (error) {
     captureException(error);
   }

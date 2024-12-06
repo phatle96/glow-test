@@ -1,18 +1,19 @@
-import { createLoopsClient, transactionalEmailIds } from '@/lib/loops';
+import { createLoopsClient, saveEmail, transactionalEmailIds } from '@/lib/loops';
 import { captureException } from '@sentry/nextjs';
 
 export async function sendSubscriptionCancelledEmail(email: string) {
-  const loops = createLoopsClient();
+  // const loops = createLoopsClient();
 
-  if (!loops) {
-    return;
-  }
+  // if (!loops) {
+  //   return;
+  // }
 
   try {
-    await loops.sendTransactionalEmail({
-      transactionalId: transactionalEmailIds.subscriptionCancelled,
-      email,
-    });
+    saveEmail(email, 'subscriptionCancelled')
+    // await loops.sendTransactionalEmail({
+    //   transactionalId: transactionalEmailIds.subscriptionCancelled,
+    //   email,
+    // });
   } catch (error) {
     captureException(error);
   }

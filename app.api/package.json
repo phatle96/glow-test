@@ -23,6 +23,7 @@
     "@sentry/types": "^8.7.0",
     "@tryglow/blocks": "*",
     "@tryglow/prisma": "*",
+    "axios": "^1.7.9",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "esbuild": "^0.21.3",

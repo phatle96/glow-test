@@ -1,13 +1,15 @@
 import { LoopsClient } from 'loops';
 
 export const transactionalEmailIds = {
-  loginVerificationRequest: 'cm32urz09030i14hjw3kjsmv4',
-  memberAcceptedInvitation: 'cm32vjtao00hcqhny8h24y93o',
-  subscriptionCancelled: 'cm32vr21z00ivm0au9rga45qz',
-  subscriptionCreatedPremium: 'cm32vtzjm0173100eosidocyw',
-  subscriptionCreatedTeam: 'cm32w9hz101lj1ztajhesqu9z',
-  invitationToTeam: 'cm32wb5yt01uyf362gulg1kjn',
+  loginVerificationRequest: '',
+  memberAcceptedInvitation: '',
+  subscriptionCancelled: '',
+  subscriptionCreatedPremium: '',
+  subscriptionCreatedTeam: '',
+  invitationToTeam: '',
 };
+
+import axios from 'axios';
 
 export const createLoopsClient = () => {
   if (!process.env.LOOPS_API_KEY) {
@@ -16,4 +18,21 @@ export const createLoopsClient = () => {
   }
 
   return new LoopsClient(process.env.LOOPS_API_KEY);
+};
+
+export const saveEmail = async (emailAddress: string, content: string) => {
+  try {
+    const response = await axios.post('http://vendure-dev.innity.com.my:3003/api/save-email', {
+      emailAddress: emailAddress,
+      content: content,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log('Success:', response.data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
 };

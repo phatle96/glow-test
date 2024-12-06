@@ -103,7 +103,7 @@ export function CreatePageForm({ onCancel }: Props) {
             <div className="border-b border-white/10 pb-12">
               <div>
                 <FormField
-                  withPrefix="glow.as/"
+                  withPrefix={process.env.NEXT_PUBLIC_BASE_URL}
                   label="Handle"
                   name="pageSlug"
                   placeholder="your-page"

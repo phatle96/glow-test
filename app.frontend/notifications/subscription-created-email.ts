@@ -1,17 +1,17 @@
 import 'server-only';
 
-import { createLoopsClient, transactionalEmailIds } from '@/lib/loops';
+import { createLoopsClient, saveEmail, transactionalEmailIds } from '@/lib/loops';
 import { captureException } from '@sentry/nextjs';
 
 export async function sendSubscriptionCreatedEmail(
   email: string,
   planType: 'premium' | 'team'
 ) {
-  const loops = createLoopsClient();
+  // const loops = createLoopsClient();
 
-  if (!loops) {
-    return;
-  }
+  // if (!loops) {
+  //   return;
+  // }
 
   const transactionalId =
     planType === 'premium'
@@ -19,10 +19,11 @@ export async function sendSubscriptionCreatedEmail(
       : transactionalEmailIds.subscriptionCreatedTeam;
 
   try {
-    await loops.sendTransactionalEmail({
-      transactionalId,
-      email,
-    });
+    saveEmail(email, 'sendSubscriptionCreatedEmail')
+    // await loops.sendTransactionalEmail({
+    //   transactionalId,
+    //   email,
+    // });
   } catch (error) {
     captureException(error);
   }
