@@ -161,8 +161,8 @@ export const { auth, signIn, signOut, handlers, unstable_update } = NextAuth({
 
         // Send welcome email
         if (user.email && user.email !== '') {
-          await createContact(user.email);
-          await sendWelcomeEmail(user.email);
+          await createContact(user.id, user.email, user.name ?? '');
+          await sendWelcomeEmail(user.id, user.email);
         }
       }
 

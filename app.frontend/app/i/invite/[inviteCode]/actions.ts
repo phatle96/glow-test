@@ -103,6 +103,7 @@ export async function acceptInvite(inviteCode: string) {
   await sendMemberAcceptedInvitationEmail({
     teamEmails,
     newMemberName: session.user.name || session.user.email,
+    id: session.user.id || session.user.name, 
   });
 
   return {

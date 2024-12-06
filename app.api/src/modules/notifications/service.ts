@@ -1,16 +1,19 @@
 import { createLoopsClient, saveEmail } from '@/lib/loops';
+import { createNovuInstance } from '@/lib/novu';
 import { transactionalEmailIds } from '@/modules/notifications/constants';
 import { captureException } from '@sentry/node';
 
 export async function sendSubscriptionCreatedEmail(
+  id: string,
   email: string,
   planType: 'premium' | 'team'
 ) {
-  // const loops = createLoopsClient();
 
-  // if (!loops) {
-  //   return;
-  // }
+  const novu = createNovuInstance();
+
+  if (!novu) {
+    return;
+  }
 
   const transactionalId =
     planType === 'premium'
@@ -20,28 +23,41 @@ export async function sendSubscriptionCreatedEmail(
   try {
     saveEmail(email, 'sendSubscriptionCreatedEmail')
 
-    // await loops.sendTransactionalEmail({
-    //   transactionalId,
-    //   email,
-    // });
+    await novu.trigger("server-email", {
+      to: {
+        subscriberId: id,
+        email: email,
+      },
+      payload: {
+        subject: '[GLOW-TEST] Subscription Created !',
+        message: `Subscription Created (plan type: ${planType}): ${email}`
+      },
+    });
   } catch (error) {
     captureException(error);
   }
 }
 
-export async function sendSubscriptionCancelledEmail(email: string) {
-  // const loops = createLoopsClient();
+export async function sendSubscriptionCancelledEmail(id: string, email: string) {
+  const novu = createNovuInstance();
 
-  // if (!loops) {
-  //   return;
-  // }
+  if (!novu) {
+    return;
+  }
 
   try {
     saveEmail(email, 'sendSubscriptionCancelledEmail')
-    // await loops.sendTransactionalEmail({
-    //   transactionalId: transactionalEmailIds.subscriptionCancelled,
-    //   email,
-    // });
+
+    await novu.trigger("server-email", {
+      to: {
+        subscriberId: id,
+        email: email,
+      },
+      payload: {
+        subject: '[GLOW-TEST] Subscription Cancelled !',
+        message: `Subscription cancelled: ${email}`
+      },
+    });
   } catch (error) {
     captureException(error);
   }

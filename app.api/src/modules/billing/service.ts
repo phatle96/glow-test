@@ -59,6 +59,7 @@ export async function setupSubscription(sessionId: string) {
 
   if (dbUser.email) {
     await sendSubscriptionCreatedEmail(
+      dbUser.id,
       dbUser.email,
       hasTeamAccess ? 'team' : 'premium'
     );
@@ -109,7 +110,7 @@ export async function cancelSubscription(subscriptionId: string) {
   });
 
   if (dbUser.email) {
-    await sendSubscriptionCancelledEmail(dbUser.email);
+    await sendSubscriptionCancelledEmail(dbUser.id, dbUser.email);
   }
 
   return;

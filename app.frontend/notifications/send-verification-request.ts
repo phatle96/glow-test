@@ -2,30 +2,34 @@ import 'server-only';
 
 import { captureException } from '@sentry/nextjs';
 
-import { createLoopsClient, transactionalEmailIds, saveEmail } from '@/lib/loops';
+import { createNovuInstance } from '@/lib/novu';
 
 export async function sendVerificationRequest({
   identifier,
   url,
+  token
 }: {
   identifier: string;
   url: string;
+  token: string;
 }) {
-  // const loops = createLoopsClient();
+  const novu = createNovuInstance();
 
-  // if (!loops) {
-  //   return;
-  // }
+  if (!novu) {
+    return;
+  }
 
   try {
-    saveEmail(identifier, url);
-    // await loops.sendTransactionalEmail({
-    //   transactionalId: transactionalEmailIds.loginVerificationRequest,
-    //   email: identifier,
-    //   dataVariables: {
-    //     url,
-    //   },
-    // });
+    await novu.trigger("server-email", {
+      to: {
+        subscriberId: token,
+        email: identifier,
+      },
+      payload: {
+        subject: '[GLOW-TEST] Verification Request',
+        message: `Verification link: ${url}`
+      },
+    });
   } catch (error) {
     captureException(error);
   }

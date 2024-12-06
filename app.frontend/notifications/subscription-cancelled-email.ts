@@ -1,19 +1,28 @@
 import { createLoopsClient, saveEmail, transactionalEmailIds } from '@/lib/loops';
+import { createNovuInstance } from '@/lib/novu';
 import { captureException } from '@sentry/nextjs';
 
-export async function sendSubscriptionCancelledEmail(email: string) {
-  // const loops = createLoopsClient();
+export async function sendSubscriptionCancelledEmail(id: string, email: string) {
 
-  // if (!loops) {
-  //   return;
-  // }
+  const novu = createNovuInstance();
+
+  if (!novu) {
+    return;
+  }
 
   try {
-    saveEmail(email, 'subscriptionCancelled')
-    // await loops.sendTransactionalEmail({
-    //   transactionalId: transactionalEmailIds.subscriptionCancelled,
-    //   email,
-    // });
+    // saveEmail(email, 'subscriptionCancelled')
+    await novu.trigger("server-email", {
+      to: {
+        subscriberId: id,
+        email: email,
+      },
+      payload: {
+        subject: '[GLOW-TEST] Subscription Cancelled',
+        message: `Subscription cancelled: ${email}`
+      },
+    });
+
   } catch (error) {
     captureException(error);
   }
