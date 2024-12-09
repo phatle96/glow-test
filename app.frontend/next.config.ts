@@ -49,8 +49,8 @@ const nextConfig: NextConfig = {
 };
 
 export default withSentryConfig(withMDX(nextConfig), {
-  org: 'hyperdusk',
-  project: 'glow',
+  org: 'tien-phat-technical-company',
+  project: 'glow-test',
   silent: false,
   hideSourceMaps: true,
 });
