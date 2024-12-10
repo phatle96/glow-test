@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: app.api/Dockerfile
+    command: npm run start:api
+    volumes:
+      - ./package.blocks:/app/package.blocks
+      - ./package.prisma:/app/package.prisma
+    working_dir: /app/app.api
+    ports:
+      - "3001:3001" # Expose API on port 4000
+
+  frontend:
+    build:
+      context: .
+      dockerfile: app.frontend/Dockerfile
+    command: npm run start:frontend
+    depends_on:
+      - api
+    volumes:
+      - ./package.blocks:/app/package.blocks
+      - ./package.prisma:/app/package.prisma
+    working_dir: /app/app.frontend
+    ports:
+      - "3000:3000" # Expose frontend on port 3000

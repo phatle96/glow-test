@@ -2,7 +2,7 @@ import { getArticles } from '@/app/i/blog/utils';
 import { getLearnPosts } from '@/app/i/learn/utils';
 import { MetadataRoute } from 'next';
 
-const baseUrl = `https://glow.as`;
+const baseUrl = `https://glow-test.phatle.dev`;
 
 const baseSitemap = [
   {

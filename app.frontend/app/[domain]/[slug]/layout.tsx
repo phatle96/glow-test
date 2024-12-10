@@ -113,7 +113,7 @@ export default async function PageLayout(props: {
           asChild
           className="fixed z-50 top-3 right-3 font-bold flex"
         >
-          <Link href="https://glow.as">Built with Glow</Link>
+          <Link href={process.env.NEXT_PUBLIC_BASE_URL ?? 'https://glow.as'}>Built with Glow</Link>
         </Button>
       )}
 

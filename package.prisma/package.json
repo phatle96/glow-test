@@ -6,7 +6,7 @@
   "scripts": {
     "prisma:generate": "prisma generate",
     "prisma:generate:no-engine": "prisma generate --no-engine",
-    "prisma:migrate": "prisma migrate deploy"
+    "prisma:migrate": "dotenvx run -f ../.env.local -- prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

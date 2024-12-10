@@ -36,7 +36,7 @@ export const { auth, signIn, signOut, handlers, unstable_update } = NextAuth({
     sessionToken: {
       name: cookieName,
       options: {
-        domain: process.env.NODE_ENV === 'production' ? '.glow.as' : undefined,
+        domain: process.env.NODE_ENV === 'production' ? `.${process.env.AUTH_TRUST_HOST}` : undefined,
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
