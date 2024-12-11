@@ -141,10 +141,10 @@ export const { auth, signIn, signOut, handlers, unstable_update } = NextAuth({
         // Show the tour
         token.features = { showGlowTour: true };
 
-        await track('signUp', {
-          userId: user.id,
-          provider: params.account?.provider ?? 'unknown',
-        });
+        // await track('signUp', {
+        //   userId: user.id,
+        //   provider: params.account?.provider ?? 'unknown',
+        // });
 
         // Create a new team for the user
         await prisma.team.create({
@@ -161,17 +161,17 @@ export const { auth, signIn, signOut, handlers, unstable_update } = NextAuth({
 
         // Send welcome email
         if (user.email && user.email !== '') {
-          await createContact(user.id, user.email, user.name ?? '');
+          // await createContact(user.id, user.email, user.name ?? '');
           await sendWelcomeEmail(user.id, user.email);
         }
       }
 
-      if (trigger === 'signIn') {
-        await track('signIn', {
-          userId: user.id as string,
-          provider: params.account?.provider ?? 'unknown',
-        });
-      }
+      // if (trigger === 'signIn') {
+      //   await track('signIn', {
+      //     userId: user.id as string,
+      //     provider: params.account?.provider ?? 'unknown',
+      //   });
+      // }
 
       if (user) {
         token.uid = user.id as string;

@@ -9,6 +9,7 @@
     "prisma:migrate": "dotenvx run -f ../.env.local -- prisma migrate deploy"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.29.0",
     "@prisma/client": "^5.22.0",
     "prisma": "^5.22.0",
     "ts-node": "^10.9.2",

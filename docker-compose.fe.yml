@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: app.frontend/Dockerfile
+    # command: npm run start:frontend
+    volumes:
+      - ./package.blocks:/app/package.blocks
+      - ./package.prisma:/app/package.prisma
+    working_dir: /app/app.frontend
+    networks:
+      - glow_network
+    ports:
+      - "3000:3000" # Expose frontend on port 3000
+
+networks:
+  glow_network:
+    external: true

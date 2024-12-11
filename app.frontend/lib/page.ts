@@ -19,10 +19,10 @@ export async function createNewPage(input: NewPageInput) {
     return null;
   }
 
-  await track('pageCreated', {
-    teamId: session.currentTeamId,
-    slug: input.slug,
-  });
+  // await track('pageCreated', {
+  //   teamId: session.currentTeamId,
+  //   slug: input.slug,
+  // });
 
   return prisma.page.create({
     data: {

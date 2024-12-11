@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "dotenvx run -f ../.env.local -- next dev",
+    "prisma:generate": "dotenvx run -f ../.env.local -- prisma generate --schema ../package.prisma/prisma/schema.prisma",
+    "prisma:migrate": "dotenvx run -f ../.env.local -- prisma migrate deploy --schema ../package.prisma/prisma/schema.prisma",
     "build:frontend": "dotenvx run -f ../.env.local -- next build",
     "start:frontend": "dotenvx run -f ../.env.local -- next start",
     "lint": "next lint",

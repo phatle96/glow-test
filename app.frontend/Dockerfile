@@ -1,5 +1,5 @@
 # Use Node.js image
-FROM node:22-alpine
+FROM node:22
 
 WORKDIR /app
 
@@ -14,8 +14,8 @@ COPY app.frontend ./app.frontend
 
 WORKDIR /app/app.frontend
 RUN npm install --legacy-peer-deps && \
-    npx dotenvx run -f ../.env.local -- prisma generate --schema ../package.prisma/prisma/schema.prisma && \
-    # npx dotenvx run -f ../.env.local -- prisma migrate deploy --schema ../package.prisma/prisma/schema.prisma && \
+    npm run prisma:generate && \
+    npm run prisma:migrate && \
     npm run build:frontend
 
 # Expose the port

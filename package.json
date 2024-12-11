@@ -27,6 +27,8 @@
   "scripts": {
     "lint": "turbo lint",
     "dev": "turbo dev",
+    "prisma:generate": "dotenvx run -f .env.local -- prisma generate --schema ./package.prisma/prisma/schema.prisma",
+    "prisma:migrate": "dotenvx run -f .env.local -- prisma migrate deploy --schema ./package.prisma/prisma/schema.prisma",
     "dev:migrate": "dotenvx run -f .env.local -- prisma migrate dev --schema ./package.prisma/prisma/schema.prisma",
     "dev:seed": "dotenvx run -f .env.local -- tsx ./package.prisma/prisma/seed.ts"
   },

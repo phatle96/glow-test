@@ -1,5 +1,5 @@
 # Use Node.js image
-FROM node:22-alpine
+FROM node:22
 
 WORKDIR /app
 
@@ -13,8 +13,11 @@ RUN npm install
 COPY app.api ./app.api
 
 WORKDIR /app/app.api
-RUN npm install --production
-RUN npm run build:api
+
+RUN npm install --legacy-peer-deps && \
+    npm run prisma:generate && \
+    npm run prisma:migrate && \
+    npm run build:api
 
 # Expose the port
 EXPOSE 3001

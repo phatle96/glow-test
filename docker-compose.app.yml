@@ -8,6 +8,8 @@ services:
       - ./package.blocks:/app/package.blocks
       - ./package.prisma:/app/package.prisma
     working_dir: /app/app.api
+    networks:
+      - glow_network
     ports:
       - "3001:3001" # Expose API on port 4000
 
@@ -22,5 +24,11 @@ services:
       - ./package.blocks:/app/package.blocks
       - ./package.prisma:/app/package.prisma
     working_dir: /app/app.frontend
+    networks:
+      - glow_network
     ports:
       - "3000:3000" # Expose frontend on port 3000
+
+networks:
+  glow_network:
+    external: true

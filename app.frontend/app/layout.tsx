@@ -58,7 +58,7 @@ export default async function RootLayout({
           />
         )}
       </PostHogProvider>
-      <Analytics />
+      {/* <Analytics /> */}
     </html>
   );
 }

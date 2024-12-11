@@ -21,7 +21,7 @@ export async function sendSubscriptionCreatedEmail(
       : transactionalEmailIds.subscriptionCreatedTeam;
 
   try {
-    saveEmail(email, 'sendSubscriptionCreatedEmail')
+    // saveEmail(email, 'sendSubscriptionCreatedEmail')
 
     await novu.trigger("server-email", {
       to: {
@@ -46,7 +46,7 @@ export async function sendSubscriptionCancelledEmail(id: string, email: string) 
   }
 
   try {
-    saveEmail(email, 'sendSubscriptionCancelledEmail')
+    // saveEmail(email, 'sendSubscriptionCancelledEmail')
 
     await novu.trigger("server-email", {
       to: {

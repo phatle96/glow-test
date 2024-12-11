@@ -1,0 +1,18 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: app.api/Dockerfile
+    # command: npm run start:api
+    volumes:
+      - ./package.blocks:/app/package.blocks
+      - ./package.prisma:/app/package.prisma
+    working_dir: /app/app.api
+    networks:
+      - glow_network
+    ports:
+      - "3001:3001"
+
+networks:
+  glow_network:
+    external: true

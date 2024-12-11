@@ -19,7 +19,8 @@ export default async function middleware(req: NextRequest) {
 
   let hostname = req.headers
     .get('host')!
-    .replace('.dev.glow:3000', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+    .replace('localhost:3000', `${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+    // .replace('.dev.glow:3000', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
 
   const searchParams = req.nextUrl.searchParams.toString();
 

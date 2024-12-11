@@ -8,7 +8,6 @@ await build({
   outdir: 'dist',
   write: true,
   entryPoints: [`./src/index.ts`],
-  external: ['sharp'],
   inject: ['./cjs-shim.ts'],
   sourcemap: true,
   plugins: [
